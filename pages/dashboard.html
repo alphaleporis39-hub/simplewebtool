@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#6d28d9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+
+    <!-- SEO -->
+    <title>Dashboard — Simple Web Tools</title>
+    <meta
+      name="description"
+      content="Your Simple Web Tools dashboard. Access Student, Finance, Food, Image and PDF tools from one beautiful place."
+    />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href="https://simplewebtool.online/pages/dashboard.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Simple Web Tools" />
+    <meta property="og:title" content="Dashboard — Simple Web Tools" />
+    <meta property="og:description" content="Access Student, Finance, Food, Image and PDF tools from one beautiful place." />
+    <meta property="og:url" content="https://simplewebtool.online/pages/dashboard.html" />
+    <meta property="og:image" content="/assets/og-image.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dashboard — Simple Web Tools" />
+    <meta name="twitter:description" content="Access Student, Finance, Food, Image and PDF tools from one beautiful place." />
+    <meta name="twitter:image" content="/assets/og-image.png" />
+
+    <!-- Icons & PWA -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- Structured Data: breadcrumb -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://simplewebtool.online/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Dashboard",
+            "item": "https://simplewebtool.online/pages/dashboard.html"
+          }
+        ]
+      }
+    </script>
+
+    <!-- Pre-paint theme (prevents flash of wrong theme) -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('swt-theme');
+          var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = saved === 'light' || saved === 'dark' ? saved : sysDark ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+
+  <body data-requires-auth data-nav>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Decorative background -->
+    <div class="bg-decor" aria-hidden="true">
+      <span class="blob blob-1"></span>
+      <span class="blob blob-2"></span>
+      <span class="blob blob-3"></span>
+    </div>
+
+    <!-- Navbar is injected here by script.js (renderNavbar) -->
+    <div id="navbar"></div>
+
+    <main id="main" class="container page">
+      <!-- Welcome -->
+      <section class="welcome-bar animate-in" aria-labelledby="welcomeMsg">
+        <div>
+          <h1 id="welcomeMsg">Welcome back</h1>
+          <p class="text-soft">Pick a category to get started. Everything runs fast, right in your browser.</p>
+        </div>
+        <a class="btn btn-ghost" href="/pages/settings.html">⚙️ Settings</a>
+      </section>
+
+      <!-- Category cards -->
+      <section aria-labelledby="categories-title">
+        <h2 id="categories-title" class="sr-only">Tool categories</h2>
+
+        <div class="category-grid">
+          <!-- Student Tools -->
+          <a class="category-card animate-in" href="/pages/student.html" aria-label="Open Student Tools">
+            <span class="category-icon" aria-hidden="true">🎓</span>
+            <h3 class="category-title">Student Tools</h3>
+            <p class="category-desc">
+              Attendance, CGPA, SGPA &amp; marks calculators, plus a Pomodoro study timer.
+            </p>
+            <span class="category-arrow" aria-hidden="true">Open →</span>
+          </a>
+
+          <!-- Finance Tools -->
+          <a class="category-card animate-in" href="/pages/finance.html" aria-label="Open Finance Tools">
+            <span class="category-icon" aria-hidden="true">💰</span>
+            <h3 class="category-title">Finance Tools</h3>
+            <p class="category-desc">
+              EMI, SIP (with chart) and inflation calculators to plan your money.
+            </p>
+            <span class="category-arrow" aria-hidden="true">Open →</span>
+          </a>
+
+          <!-- Food & Nutrition -->
+          <a class="category-card animate-in" href="/pages/food.html" aria-label="Open Food and Nutrition Tools">
+            <span class="category-icon" aria-hidden="true">🥗</span>
+            <h3 class="category-title">Food &amp; Nutrition</h3>
+            <p class="category-desc">
+              Protein calculator and an AI-style food recommendation chat.
+            </p>
+            <span class="category-arrow" aria-hidden="true">Open →</span>
+          </a>
+
+          <!-- Image Tools -->
+          <a class="category-card animate-in" href="/pages/image.html" aria-label="Open Image Tools">
+            <span class="category-icon" aria-hidden="true">🖼️</span>
+            <h3 class="category-title">Image Tools</h3>
+            <p class="category-desc">
+              Compress, resize, convert formats and remove backgrounds, all offline.
+            </p>
+            <span class="category-arrow" aria-hidden="true">Open →</span>
+          </a>
+
+          <!-- PDF Tools -->
+          <a class="category-card animate-in" href="/pages/pdf.html" aria-label="Open PDF Tools">
+            <span class="category-icon" aria-hidden="true">📄</span>
+            <h3 class="category-title">PDF Tools</h3>
+            <p class="category-desc">
+              Images→PDF, compress, merge PDFs and a handy timestamp converter.
+            </p>
+            <span class="category-arrow" aria-hidden="true">Open →</span>
+          </a>
+
+          <!-- About (bonus tile) -->
+          <a class="category-card animate-in" href="/pages/about.html" aria-label="About Simple Web Tools">
+            <span class="category-icon" aria-hidden="true">ℹ️</span>
+            <h3 class="category-title">About</h3>
+            <p class="category-desc">
+              Learn about Simple Web Tools, privacy, terms and how to get in touch.
+            </p>
+            <span class="category-arrow" aria-hidden="true">Open →</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          Made with <span aria-hidden="true">❤️</span><span class="sr-only">love</span> by Mohit
+          Chaudhary · <span id="footerYear">2026</span> · All Rights Reserved
+        </p>
+      </div>
+    </footer>
+
+    <noscript>
+      <div class="noscript-banner">
+        Simple Web Tools needs JavaScript enabled to work. Please enable it in your browser.
+      </div>
+    </noscript>
+
+    <!-- Core app module: guards page, renders navbar, sets welcome + year -->
+    <script type="module" src="/js/script.js"></script>
+  </body>
+</html>

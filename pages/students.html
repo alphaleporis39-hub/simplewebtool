@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#6d28d9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+
+    <!-- SEO -->
+    <title>Student Tools — Attendance, CGPA, SGPA, Marks &amp; Study Timer</title>
+    <meta
+      name="description"
+      content="Free student calculators: attendance percentage, CGPA, SGPA, marks &amp; grade, plus a Pomodoro study timer. Fast and easy to use."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://simplewebtool.online/pages/student.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Simple Web Tools" />
+    <meta property="og:title" content="Student Tools — Simple Web Tools" />
+    <meta property="og:description" content="Attendance, CGPA, SGPA, marks calculators and a Pomodoro study timer." />
+    <meta property="og:url" content="https://simplewebtool.online/pages/student.html" />
+    <meta property="og:image" content="/assets/og-image.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Student Tools — Simple Web Tools" />
+    <meta name="twitter:description" content="Attendance, CGPA, SGPA, marks calculators and a Pomodoro study timer." />
+    <meta name="twitter:image" content="/assets/og-image.png" />
+
+    <!-- Icons & PWA -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- Structured Data: breadcrumb -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://simplewebtool.online/" },
+          { "@type": "ListItem", "position": 2, "name": "Dashboard", "item": "https://simplewebtool.online/pages/dashboard.html" },
+          { "@type": "ListItem", "position": 3, "name": "Student Tools", "item": "https://simplewebtool.online/pages/student.html" }
+        ]
+      }
+    </script>
+
+    <!-- Pre-paint theme -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('swt-theme');
+          var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = saved === 'light' || saved === 'dark' ? saved : sysDark ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+
+  <body data-requires-auth data-nav>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="bg-decor" aria-hidden="true">
+      <span class="blob blob-1"></span>
+      <span class="blob blob-2"></span>
+    </div>
+
+    <!-- Navbar injected by script.js -->
+    <div id="navbar"></div>
+
+    <main id="main" class="container page">
+      <header class="page-head animate-in">
+        <h1>🎓 Student Tools</h1>
+        <p>Quick, accurate calculators and a focus timer to help you study smarter.</p>
+      </header>
+
+      <div class="tools-grid">
+        <!-- ============================================================= -->
+        <!-- 1. Attendance Calculator                                       -->
+        <!-- ============================================================= -->
+        <section class="card tool" aria-labelledby="att-title">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">📅</span>
+            <h2 id="att-title">Attendance Calculator</h2>
+          </div>
+
+          <form id="attendanceForm" class="stack" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="attAttended">Classes attended</label>
+                <input id="attAttended" class="input" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g. 36" required />
+              </div>
+              <div class="field">
+                <label for="attTotal">Total classes</label>
+                <input id="attTotal" class="input" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g. 50" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="attTarget">Target attendance %</label>
+              <input id="attTarget" class="input" type="number" min="1" max="100" step="1" inputmode="numeric" value="75" />
+            </div>
+            <div class="tool-actions">
+              <button class="btn btn-primary" type="submit">Calculate</button>
+              <button class="btn btn-ghost" type="reset">Reset</button>
+            </div>
+            <p class="field-error" id="attError" role="alert" aria-live="polite"></p>
+          </form>
+
+          <div class="result is-empty" id="attResult" aria-live="polite"></div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 2. CGPA Calculator (dynamic semesters)                         -->
+        <!-- ============================================================= -->
+        <section class="card tool" aria-labelledby="cgpa-title">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">📈</span>
+            <h2 id="cgpa-title">CGPA Calculator</h2>
+          </div>
+
+          <form id="cgpaForm" class="stack" novalidate>
+            <div id="cgpaRows" class="stack" aria-label="Semesters"></div>
+
+            <div class="tool-actions">
+              <button class="btn btn-ghost btn-sm" type="button" id="cgpaAdd">＋ Add Semester</button>
+            </div>
+
+            <div class="tool-actions">
+              <button class="btn btn-primary" type="submit">Calculate CGPA</button>
+              <button class="btn btn-ghost" type="button" id="cgpaReset">Reset</button>
+            </div>
+            <p class="field-error" id="cgpaError" role="alert" aria-live="polite"></p>
+          </form>
+
+          <div class="result is-empty" id="cgpaResult" aria-live="polite"></div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 3. SGPA Calculator (dynamic subjects)                          -->
+        <!-- ============================================================= -->
+        <section class="card tool" aria-labelledby="sgpa-title">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">🧮</span>
+            <h2 id="sgpa-title">SGPA Calculator</h2>
+          </div>
+
+          <form id="sgpaForm" class="stack" novalidate>
+            <div id="sgpaRows" class="stack" aria-label="Subjects"></div>
+
+            <div class="tool-actions">
+              <button class="btn btn-ghost btn-sm" type="button" id="sgpaAdd">＋ Add Subject</button>
+            </div>
+
+            <div class="tool-actions">
+              <button class="btn btn-primary" type="submit">Calculate SGPA</button>
+              <button class="btn btn-ghost" type="button" id="sgpaReset">Reset</button>
+            </div>
+            <p class="field-error" id="sgpaError" role="alert" aria-live="polite"></p>
+          </form>
+
+          <div class="result is-empty" id="sgpaResult" aria-live="polite"></div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 4. Marks Calculator                                            -->
+        <!-- ============================================================= -->
+        <section class="card tool" aria-labelledby="marks-title">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">✅</span>
+            <h2 id="marks-title">Marks Calculator</h2>
+          </div>
+
+          <form id="marksForm" class="stack" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="marksObtained">Obtained marks</label>
+                <input id="marksObtained" class="input" type="number" min="0" step="any" inputmode="decimal" placeholder="e.g. 410" required />
+              </div>
+              <div class="field">
+                <label for="marksTotal">Total marks</label>
+                <input id="marksTotal" class="input" type="number" min="1" step="any" inputmode="decimal" placeholder="e.g. 500" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="marksPass">Passing %</label>
+              <input id="marksPass" class="input" type="number" min="0" max="100" step="any" inputmode="decimal" value="33" />
+            </div>
+            <div class="tool-actions">
+              <button class="btn btn-primary" type="submit">Calculate</button>
+              <button class="btn btn-ghost" type="reset">Reset</button>
+            </div>
+            <p class="field-error" id="marksError" role="alert" aria-live="polite"></p>
+          </form>
+
+          <div class="result is-empty" id="marksResult" aria-live="polite"></div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 5. Study Timer (Pomodoro)                                      -->
+        <!-- ============================================================= -->
+        <section class="card tool" aria-labelledby="timer-title">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">⏱️</span>
+            <h2 id="timer-title">Study Timer</h2>
+          </div>
+
+          <div class="stack">
+            <div class="field">
+              <label for="timerMode">Focus duration</label>
+              <select id="timerMode" class="input">
+                <option value="25">25 minutes</option>
+                <option value="45">45 minutes</option>
+                <option value="60">60 minutes</option>
+              </select>
+            </div>
+
+            <div
+              id="timerDisplay"
+              class="gradient-text"
+              style="font-size: clamp(2.6rem, 2rem + 5vw, 4rem); font-weight: 800; text-align: center; letter-spacing: .02em;"
+              role="timer"
+              aria-live="off"
+            >
+              25:00
+            </div>
+
+            <div class="tool-actions" style="justify-content: center;">
+              <button class="btn btn-primary" type="button" id="timerStart">Start</button>
+              <button class="btn btn-ghost" type="button" id="timerPause">Pause</button>
+              <button class="btn btn-ghost" type="button" id="timerReset">Reset</button>
+            </div>
+
+            <div class="result" aria-live="polite">
+              <div class="result-row">
+                <span class="result-key">Completed sessions</span>
+                <span class="result-val" id="timerSessions">0</span>
+              </div>
+              <div class="result-row">
+                <span class="result-key">Daily study time</span>
+                <span class="result-val" id="timerDaily">0m</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          Made with <span aria-hidden="true">❤️</span><span class="sr-only">love</span> by Mohit
+          Chaudhary · <span id="footerYear">2026</span> · All Rights Reserved
+        </p>
+      </div>
+    </footer>
+
+    <noscript>
+      <div class="noscript-banner">Simple Web Tools needs JavaScript enabled to work.</div>
+    </noscript>
+
+    <!-- Core module first (theme, navbar, auth), then the page tools -->
+    <script type="module" src="/js/script.js"></script>
+    <script type="module" src="/js/tools/student.js"></script>
+  </body>
+</html>

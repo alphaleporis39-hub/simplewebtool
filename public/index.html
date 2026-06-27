@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#6d28d9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+
+    <!-- Primary SEO -->
+    <title>Simple Web Tools — Free Student, Finance, Image & PDF Tools</title>
+    <meta
+      name="description"
+      content="Simple Web Tools is a free collection of fast, easy-to-use utilities for students, professionals and developers — calculators, image tools, PDF tools and more."
+    />
+    <meta name="keywords" content="free tools, student tools, finance calculator, image compressor, pdf tools, CGPA calculator, EMI calculator, SIP calculator" />
+    <meta name="author" content="Mohit Chaudhary" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://simplewebtool.online/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Simple Web Tools" />
+    <meta property="og:title" content="Simple Web Tools — Free Student, Finance, Image & PDF Tools" />
+    <meta
+      property="og:description"
+      content="A free collection of fast, easy-to-use utilities for students, professionals and developers."
+    />
+    <meta property="og:url" content="https://simplewebtool.online/" />
+    <meta property="og:image" content="/assets/og-image.png" />
+    <meta property="og:image:alt" content="Simple Web Tools" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Simple Web Tools — Free Student, Finance, Image & PDF Tools" />
+    <meta
+      name="twitter:description"
+      content="A free collection of fast, easy-to-use utilities for students, professionals and developers."
+    />
+    <meta name="twitter:image" content="/assets/og-image.png" />
+
+    <!-- Icons & PWA -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Fonts (preconnect for performance) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Simple Web Tools",
+        "url": "https://simplewebtool.online/",
+        "description": "A free collection of fast, easy-to-use utilities for students, professionals and developers.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Mohit Chaudhary" }
+      }
+    </script>
+
+    <!--
+      Apply the saved theme BEFORE paint to prevent a flash of the wrong theme.
+      This tiny inline script only reads localStorage and sets data-theme.
+      Full theme logic lives in /js/script.js.
+    -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('swt-theme');
+          var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = saved === 'light' || saved === 'dark' ? saved : sysDark ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          /* localStorage may be unavailable; default theme stays. */
+        }
+      })();
+    </script>
+  </head>
+
+  <body class="landing-body">
+    <!-- Skip link for keyboard/screen-reader users -->
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Decorative background blobs (aria-hidden: purely visual) -->
+    <div class="bg-decor" aria-hidden="true">
+      <span class="blob blob-1"></span>
+      <span class="blob blob-2"></span>
+      <span class="blob blob-3"></span>
+    </div>
+
+    <!-- Top bar -->
+    <header class="landing-header">
+      <a class="brand" href="/" aria-label="Simple Web Tools home">
+        <span class="brand-mark" aria-hidden="true">🧰</span>
+        <span class="brand-text">Simple Web Tools</span>
+      </a>
+
+      <button
+        id="themeToggle"
+        class="theme-toggle"
+        type="button"
+        aria-label="Toggle dark and light theme"
+        aria-pressed="false"
+        title="Toggle theme"
+      >
+        <span class="theme-icon theme-icon--sun" aria-hidden="true">☀️</span>
+        <span class="theme-icon theme-icon--moon" aria-hidden="true">🌙</span>
+      </button>
+    </header>
+
+    <!-- Main / hero -->
+    <main id="main" class="landing-main">
+      <section class="hero glass" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <p class="hero-eyebrow">Free • Fast • No sign-up</p>
+          <h1 id="hero-title" class="hero-title">
+            All your everyday tools,<br />
+            in <span class="gradient-text">one place</span>.
+          </h1>
+          <p class="hero-subtitle">
+            Calculators for students &amp; finance, image &amp; PDF utilities, and more — fast,
+            offline-friendly, and beautifully simple.
+          </p>
+
+          <!-- Name-only login -->
+          <form id="loginForm" class="login-form" novalidate>
+            <label class="login-label" for="nameInput">Enter your name to continue</label>
+            <div class="login-row">
+              <input
+                id="nameInput"
+                name="name"
+                class="login-input"
+                type="text"
+                inputmode="text"
+                autocomplete="given-name"
+                placeholder="e.g. Mohit"
+                maxlength="40"
+                aria-describedby="nameError"
+                required
+              />
+              <button id="continueBtn" class="btn btn-primary" type="submit">
+                <span class="btn-label">Continue</span>
+                <span class="btn-spinner" aria-hidden="true"></span>
+              </button>
+            </div>
+            <p id="nameError" class="field-error" role="alert" aria-live="polite"></p>
+          </form>
+
+          <ul class="hero-badges" aria-label="Highlights">
+            <li class="badge">🎓 Student Tools</li>
+            <li class="badge">💰 Finance</li>
+            <li class="badge">🥗 Food</li>
+            <li class="badge">🖼️ Image</li>
+            <li class="badge">📄 PDF</li>
+          </ul>
+        </div>
+
+        <!-- Visual preview card -->
+        <div class="hero-visual glass-soft" aria-hidden="true">
+          <div class="preview-card">
+            <div class="preview-dot-row">
+              <span class="preview-dot"></span><span class="preview-dot"></span
+              ><span class="preview-dot"></span>
+            </div>
+            <div class="preview-grid">
+              <span class="preview-tile">🎓</span>
+              <span class="preview-tile">💰</span>
+              <span class="preview-tile">🥗</span>
+              <span class="preview-tile">🖼️</span>
+              <span class="preview-tile">📄</span>
+              <span class="preview-tile">⚙️</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+      <p>
+        Made with <span aria-hidden="true">❤️</span><span class="sr-only">love</span> by Mohit
+        Chaudhary · <span id="footerYear">2026</span> · All Rights Reserved
+      </p>
+    </footer>
+
+    <!-- No-JS fallback -->
+    <noscript>
+      <div class="noscript-banner">
+        Simple Web Tools needs JavaScript enabled to work. Please enable it in your browser.
+      </div>
+    </noscript>
+
+    <!-- Core app script (theme, auth, navigation helpers) -->
+    <script type="module" src="/js/script.js"></script>
+  </body>
+</html>

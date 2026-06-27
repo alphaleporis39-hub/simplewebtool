@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#6d28d9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+
+    <!-- SEO -->
+    <title>Image Tools - Compressor, Resizer, Converter &amp; Background Remover</title>
+    <meta
+      name="description"
+      content="Free browser-based image tools to compress images, remove backgrounds, resize pictures and convert PNG to JPG or JPG to PNG."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://simplewebtool.online/pages/image.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Simple Web Tools" />
+    <meta property="og:title" content="Image Tools - Simple Web Tools" />
+    <meta property="og:description" content="Compress, resize, convert images and remove backgrounds in your browser." />
+    <meta property="og:url" content="https://simplewebtool.online/pages/image.html" />
+    <meta property="og:image" content="/assets/og-image.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Image Tools - Simple Web Tools" />
+    <meta name="twitter:description" content="Compress, resize, convert images and remove backgrounds in your browser." />
+    <meta name="twitter:image" content="/assets/og-image.png" />
+
+    <!-- Icons & PWA -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- Structured Data: breadcrumb -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://simplewebtool.online/" },
+          { "@type": "ListItem", "position": 2, "name": "Dashboard", "item": "https://simplewebtool.online/pages/dashboard.html" },
+          { "@type": "ListItem", "position": 3, "name": "Image Tools", "item": "https://simplewebtool.online/pages/image.html" }
+        ]
+      }
+    </script>
+
+    <!-- Pre-paint theme -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('swt-theme');
+          var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = saved === 'light' || saved === 'dark' ? saved : sysDark ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+
+  <body data-requires-auth data-nav>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="bg-decor" aria-hidden="true">
+      <span class="blob blob-1"></span>
+      <span class="blob blob-2"></span>
+    </div>
+
+    <!-- Navbar injected by script.js -->
+    <div id="navbar"></div>
+
+    <main id="main" class="container page">
+      <header class="page-head animate-in">
+        <h1>Image Tools</h1>
+        <p>Compress, resize, convert and clean up images quickly in your browser.</p>
+      </header>
+
+      <div class="tools-grid">
+        <!-- ============================================================= -->
+        <!-- 1. Image Compressor                                           -->
+        <!-- ============================================================= -->
+        <section class="card tool" aria-labelledby="compress-title">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">🗜️</span>
+            <h2 id="compress-title">Image Compressor</h2>
+          </div>
+
+          <form id="compressForm" class="stack" novalidate>
+            <div class="field">
+              <label for="compressFile">Choose image</label>
+              <input id="compressFile" class="input" type="file" accept="image/png,image/jpeg,image/webp" required />
+            </div>
+
+            <div class="field">
+              <label for="compressQuality">Quality</label>
+              <input id="compressQuality" class="input" type="range" min="10" max="95" step="5" value="75" />
+              <p class="text-muted" id="compressQualityLabel">75%</p>
+            </div>
+
+            <div class="tool-actions">
+              <button class="btn btn-primary" type="submit">
+                <span class="btn-label">Compress Image</span>
+                <span class="btn-spinner" aria-hidden="true"></span>
+              </button>
+              <button class="btn btn-ghost" type="reset">Reset</button>
+            </div>
+            <p class="field-error" id="compressError" role="alert" aria-live="polite"></p>
+          </form>
+
+          <div class="result is-empty" id="compressResult" aria-live="polite"></div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 2. Background Remover                                          -->
+        <!-- ============================================================= -->
+        <section class="card tool" aria-labelledby="bg-title">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">✂️</span>
+            <h2 id="bg-title">Background Remover</h2>
+          </div>
+
+          <form id="bgForm" class="stack" novalidate>
+            <div class="field">
+              <label for="bgFile">Choose image</label>
+              <input id="bgFile" class="input" type="file" accept="image/png,image/jpeg,image/webp" required />
+            </div>
+
+            <div class="result">
+              <p class="text-soft">
+                Best for clear subjects with simple backgrounds. Processing runs locally when the
+                model is available.
+              </p>
+            </div>
+
+            <div class="tool-actions">
+              <button class="btn btn-primary" type="submit">
+                <span class="btn-label">Remove Background</span>
+                <span class="btn-spinner" aria-hidden="true"></span>
+              </button>
+              <button class="btn btn-ghost" type="reset">Reset</button>
+            </div>
+            <p class="field-error" id="bgError" role="alert" aria-live="polite"></p>
+          </form>
+
+          <div class="result is-empty" id="bgResult" aria-live="polite"></div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 3. Image Resizer                                               -->
+        <!-- ============================================================= -->
+        <section class="card tool" aria-labelledby="resize-title">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">📐</span>
+            <h2 id="resize-title">Image Resizer</h2>
+          </div>
+
+          <form id="resizeForm" class="stack" novalidate>
+            <div class="field">
+              <label for="resizeFile">Choose image</label>
+              <input id="resizeFile" class="input" type="file" accept="image/png,image/jpeg,image/webp" required />
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="resizeWidth">Width</label>
+                <input id="resizeWidth" class="input" type="number" min="1" step="1" inputmode="numeric" placeholder="e.g. 1200" required />
+              </div>
+              <div class="field">
+                <label for="resizeHeight">Height</label>
+                <input id="resizeHeight" class="input" type="number" min="1" step="1" inputmode="numeric" placeholder="e.g. 800" required />
+              </div>
+            </div>
+
+            <label class="field-label">
+              <input id="resizeLock" type="checkbox" checked />
+              Keep aspect ratio
+            </label>
+
+            <div class="tool-actions">
+              <button class="btn btn-primary" type="submit">
+                <span class="btn-label">Resize Image</span>
+                <span class="btn-spinner" aria-hidden="true"></span>
+              </button>
+              <button class="btn btn-ghost" type="reset">Reset</button>
+            </div>
+            <p class="field-error" id="resizeError" role="alert" aria-live="polite"></p>
+          </form>
+
+          <div class="result is-empty" id="resizeResult" aria-live="polite"></div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 4. PNG / JPG Converter                                         -->
+        <!-- ============================================================= -->
+        <section class="card tool" aria-labelledby="convert-title">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">🔁</span>
+            <h2 id="convert-title">PNG ↔ JPG Converter</h2>
+          </div>
+
+          <form id="convertForm" class="stack" novalidate>
+            <div class="field">
+              <label for="convertFile">Choose image</label>
+              <input id="convertFile" class="input" type="file" accept="image/png,image/jpeg" required />
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="convertFormat">Convert to</label>
+                <select id="convertFormat" class="input">
+                  <option value="image/jpeg" selected>JPG</option>
+                  <option value="image/png">PNG</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="convertQuality">JPG quality</label>
+                <input id="convertQuality" class="input" type="number" min="10" max="100" step="5" value="90" />
+              </div>
+            </div>
+
+            <div class="tool-actions">
+              <button class="btn btn-primary" type="submit">
+                <span class="btn-label">Convert Image</span>
+                <span class="btn-spinner" aria-hidden="true"></span>
+              </button>
+              <button class="btn btn-ghost" type="reset">Reset</button>
+            </div>
+            <p class="field-error" id="convertError" role="alert" aria-live="polite"></p>
+          </form>
+
+          <div class="result is-empty" id="convertResult" aria-live="polite"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          Made with <span aria-hidden="true">❤️</span><span class="sr-only">love</span> by Mohit
+          Chaudhary · <span id="footerYear">2026</span> · All Rights Reserved
+        </p>
+      </div>
+    </footer>
+
+    <noscript>
+      <div class="noscript-banner">Simple Web Tools needs JavaScript enabled to work.</div>
+    </noscript>
+
+    <!-- Core module first, then image tools -->
+    <script type="module" src="/js/script.js"></script>
+    <script type="module" src="/js/tools/image.js"></script>
+  </body>
+</html>

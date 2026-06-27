@@ -1,0 +1,32 @@
+{
+  "name": "simple-web-tools",
+  "version": "1.0.0",
+  "description": "Simple Web Tools is a free collection of useful tools for students, professionals, developers and everyone. Fast, simple, easy-to-use utilities.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "tools",
+    "calculator",
+    "student-tools",
+    "finance-tools",
+    "pdf-tools",
+    "image-tools",
+    "utilities",
+    "web-app"
+  ],
+  "author": "Mohit Chaudhary",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0"
+  }
+}

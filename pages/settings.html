@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#6d28d9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+
+    <!-- SEO -->
+    <title>Settings - Simple Web Tools</title>
+    <meta
+      name="description"
+      content="Manage Simple Web Tools theme, notification settings, saved preferences and account options."
+    />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href="https://simplewebtool.online/pages/settings.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Simple Web Tools" />
+    <meta property="og:title" content="Settings - Simple Web Tools" />
+    <meta property="og:description" content="Manage theme, notifications and preferences for Simple Web Tools." />
+    <meta property="og:url" content="https://simplewebtool.online/pages/settings.html" />
+    <meta property="og:image" content="/assets/og-image.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Settings - Simple Web Tools" />
+    <meta name="twitter:description" content="Manage theme, notifications and preferences for Simple Web Tools." />
+    <meta name="twitter:image" content="/assets/og-image.png" />
+
+    <!-- Icons & PWA -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- Structured Data: breadcrumb -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://simplewebtool.online/" },
+          { "@type": "ListItem", "position": 2, "name": "Dashboard", "item": "https://simplewebtool.online/pages/dashboard.html" },
+          { "@type": "ListItem", "position": 3, "name": "Settings", "item": "https://simplewebtool.online/pages/settings.html" }
+        ]
+      }
+    </script>
+
+    <!-- Pre-paint theme -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('swt-theme');
+          var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = saved === 'light' || saved === 'dark' ? saved : sysDark ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+
+  <body data-requires-auth data-nav>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="bg-decor" aria-hidden="true">
+      <span class="blob blob-1"></span>
+      <span class="blob blob-2"></span>
+      <span class="blob blob-3"></span>
+    </div>
+
+    <!-- Navbar injected by script.js -->
+    <div id="navbar"></div>
+
+    <main id="main" class="container page">
+      <header class="page-head animate-in">
+        <h1>Settings</h1>
+        <p>Choose your theme, notifications and saved app preferences.</p>
+      </header>
+
+      <div class="tools-grid">
+        <!-- ============================================================= -->
+        <!-- 1. Theme Settings                                             -->
+        <!-- ============================================================= -->
+        <section class="card tool animate-in" aria-labelledby="theme-title">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">UI</span>
+            <h2 id="theme-title">Theme</h2>
+          </div>
+
+          <form id="themeSettingsForm" class="stack" novalidate>
+            <div class="field">
+              <label for="themePreference">Appearance</label>
+              <select id="themePreference" class="input">
+                <option value="system">Use system setting</option>
+                <option value="light">Light theme</option>
+                <option value="dark">Dark theme</option>
+              </select>
+            </div>
+
+            <div class="result">
+              <div class="result-row">
+                <span class="result-key">Current theme</span>
+                <span class="result-val" id="currentTheme">System</span>
+              </div>
+              <div class="result-row">
+                <span class="result-key">Applied mode</span>
+                <span class="result-val" id="appliedTheme">Light</span>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 2. Notification Settings                                      -->
+        <!-- ============================================================= -->
+        <section class="card tool animate-in" aria-labelledby="notifications-title">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">ON</span>
+            <h2 id="notifications-title">Notifications</h2>
+          </div>
+
+          <form id="notificationSettingsForm" class="stack" novalidate>
+            <label class="field-label">
+              <input id="notifyEnabled" type="checkbox" />
+              Enable app notifications
+            </label>
+
+            <label class="field-label">
+              <input id="notifyTimer" type="checkbox" />
+              Study timer completion alerts
+            </label>
+
+            <label class="field-label">
+              <input id="notifyUpdates" type="checkbox" />
+              Product update reminders
+            </label>
+
+            <div class="tool-actions">
+              <button class="btn btn-primary" type="button" id="notificationPermission">
+                Request Permission
+              </button>
+              <button class="btn btn-ghost" type="button" id="notificationTest">
+                Test Notification
+              </button>
+            </div>
+
+            <div class="result">
+              <div class="result-row">
+                <span class="result-key">Browser permission</span>
+                <span class="result-val" id="notificationStatus">Checking</span>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 3. Preferences                                                -->
+        <!-- ============================================================= -->
+        <section class="card tool animate-in" aria-labelledby="preferences-title">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">SET</span>
+            <h2 id="preferences-title">Preferences</h2>
+          </div>
+
+          <form id="preferencesForm" class="stack" novalidate>
+            <div class="field">
+              <label for="defaultCurrency">Default currency</label>
+              <select id="defaultCurrency" class="input">
+                <option value="INR" selected>INR - Indian Rupee</option>
+                <option value="USD">USD - US Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="GBP">GBP - British Pound</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="defaultTool">Start page</label>
+              <select id="defaultTool" class="input">
+                <option value="/pages/dashboard.html" selected>Dashboard</option>
+                <option value="/pages/student.html">Student Tools</option>
+                <option value="/pages/finance.html">Finance</option>
+                <option value="/pages/food.html">Food &amp; Nutrition</option>
+                <option value="/pages/image.html">Image Tools</option>
+                <option value="/pages/pdf.html">PDF Tools</option>
+              </select>
+            </div>
+
+            <label class="field-label">
+              <input id="compactResults" type="checkbox" />
+              Prefer compact result cards
+            </label>
+
+            <label class="field-label">
+              <input id="rememberInputs" type="checkbox" />
+              Remember tool input preferences
+            </label>
+
+            <div class="tool-actions">
+              <button class="btn btn-primary" type="submit">Save Preferences</button>
+              <button class="btn btn-ghost" type="button" id="resetPreferences">Reset</button>
+            </div>
+            <p class="field-error" id="preferencesMessage" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 4. Account                                                    -->
+        <!-- ============================================================= -->
+        <section class="card tool animate-in" aria-labelledby="account-title">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">ME</span>
+            <h2 id="account-title">Account</h2>
+          </div>
+
+          <div class="stack">
+            <div class="result">
+              <div class="result-row">
+                <span class="result-key">Signed in as</span>
+                <span class="result-val" id="settingsUser">User</span>
+              </div>
+              <div class="result-row">
+                <span class="result-key">Saved locally</span>
+                <span class="result-val">Name, theme and preferences</span>
+              </div>
+            </div>
+
+            <div class="tool-actions">
+              <button class="btn btn-danger" type="button" id="settingsLogout">Logout</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          Made with <span aria-hidden="true">&hearts;</span><span class="sr-only">love</span> by Mohit
+          Chaudhary &middot; <span id="footerYear">2026</span> &middot; All Rights Reserved
+        </p>
+      </div>
+    </footer>
+
+    <noscript>
+      <div class="noscript-banner">Simple Web Tools needs JavaScript enabled to work.</div>
+    </noscript>
+
+    <!-- Core module first, then page-only settings logic -->
+    <script type="module" src="/js/script.js"></script>
+    <script type="module">
+      import { $, auth, storage, theme, toast } from '/js/script.js';
+
+      const SETTINGS_KEY = 'swt-settings';
+      const DEFAULT_SETTINGS = {
+        notifications: {
+          enabled: false,
+          timer: true,
+          updates: false,
+        },
+        preferences: {
+          currency: 'INR',
+          startPage: '/pages/dashboard.html',
+          compactResults: false,
+          rememberInputs: true,
+        },
+      };
+
+      function readSettings() {
+        try {
+          return {
+            ...DEFAULT_SETTINGS,
+            ...JSON.parse(storage.get(SETTINGS_KEY, '{}')),
+          };
+        } catch {
+          return DEFAULT_SETTINGS;
+        }
+      }
+
+      function writeSettings(nextSettings) {
+        storage.set(SETTINGS_KEY, JSON.stringify(nextSettings));
+      }
+
+      function syncThemePanel() {
+        const preference = theme.getPreference();
+        $('#themePreference').value = preference;
+        $('#currentTheme').textContent = preference.charAt(0).toUpperCase() + preference.slice(1);
+        $('#appliedTheme').textContent = theme.getApplied().charAt(0).toUpperCase() + theme.getApplied().slice(1);
+      }
+
+      function notificationPermissionText() {
+        if (!('Notification' in window)) return 'Unsupported';
+        return Notification.permission.charAt(0).toUpperCase() + Notification.permission.slice(1);
+      }
+
+      function syncNotificationPanel(settings) {
+        $('#notifyEnabled').checked = settings.notifications.enabled;
+        $('#notifyTimer').checked = settings.notifications.timer;
+        $('#notifyUpdates').checked = settings.notifications.updates;
+        $('#notificationStatus').textContent = notificationPermissionText();
+      }
+
+      function syncPreferencePanel(settings) {
+        $('#defaultCurrency').value = settings.preferences.currency;
+        $('#defaultTool').value = settings.preferences.startPage;
+        $('#compactResults').checked = settings.preferences.compactResults;
+        $('#rememberInputs').checked = settings.preferences.rememberInputs;
+      }
+
+      function readPanelSettings() {
+        return {
+          notifications: {
+            enabled: $('#notifyEnabled').checked,
+            timer: $('#notifyTimer').checked,
+            updates: $('#notifyUpdates').checked,
+          },
+          preferences: {
+            currency: $('#defaultCurrency').value,
+            startPage: $('#defaultTool').value,
+            compactResults: $('#compactResults').checked,
+            rememberInputs: $('#rememberInputs').checked,
+          },
+        };
+      }
+
+      function saveFromPanels(message = 'Settings saved.') {
+        const nextSettings = readPanelSettings();
+        writeSettings(nextSettings);
+        toast(message, 'success');
+        return nextSettings;
+      }
+
+      function initSettingsPage() {
+        let settings = readSettings();
+
+        syncThemePanel();
+        syncNotificationPanel(settings);
+        syncPreferencePanel(settings);
+
+        const user = auth.getUser();
+        $('#settingsUser').textContent = user || 'Guest';
+
+        $('#themePreference').addEventListener('change', (e) => {
+          theme.set(e.target.value);
+          syncThemePanel();
+          toast('Theme updated.', 'success');
+        });
+
+        window.addEventListener('swt:themechange', syncThemePanel);
+
+        $('#notificationSettingsForm').addEventListener('change', () => {
+          settings = saveFromPanels('Notification settings saved.');
+          syncNotificationPanel(settings);
+        });
+
+        $('#notificationPermission').addEventListener('click', async () => {
+          if (!('Notification' in window)) {
+            toast('Notifications are not supported in this browser.', 'error');
+            syncNotificationPanel(settings);
+            return;
+          }
+
+          const permission = await Notification.requestPermission();
+          $('#notificationStatus').textContent = permission.charAt(0).toUpperCase() + permission.slice(1);
+          toast(permission === 'granted' ? 'Notifications enabled.' : 'Notification permission not granted.', permission === 'granted' ? 'success' : 'info');
+        });
+
+        $('#notificationTest').addEventListener('click', () => {
+          settings = saveFromPanels('Notification settings saved.');
+          syncNotificationPanel(settings);
+
+          if (!settings.notifications.enabled) {
+            toast('Enable app notifications first.', 'info');
+            return;
+          }
+
+          if (!('Notification' in window) || Notification.permission !== 'granted') {
+            toast('Browser notification permission is required.', 'error');
+            return;
+          }
+
+          new Notification('Simple Web Tools', {
+            body: 'Notifications are working.',
+          });
+        });
+
+        $('#preferencesForm').addEventListener('submit', (e) => {
+          e.preventDefault();
+          settings = saveFromPanels('Preferences saved.');
+          $('#preferencesMessage').textContent = 'Preferences saved successfully.';
+          setTimeout(() => {
+            $('#preferencesMessage').textContent = '';
+          }, 2400);
+        });
+
+        $('#resetPreferences').addEventListener('click', () => {
+          settings = DEFAULT_SETTINGS;
+          writeSettings(settings);
+          syncNotificationPanel(settings);
+          syncPreferencePanel(settings);
+          toast('Preferences reset.', 'success');
+        });
+
+        $('#settingsLogout').addEventListener('click', () => auth.logout());
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSettingsPage);
+      } else {
+        initSettingsPage();
+      }
+    </script>
+  </body>
+</html>
